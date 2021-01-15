@@ -1,0 +1,45 @@
+{% extends 'users/main.html' %}
+{% block main_section %}
+    <div class="form-section">
+        {% if user.is_authenticated %}
+            <h2>Кабинет пользователя</h2>
+            <div class="media text-muted pt-3">
+                <img class="mr-2 rounded" style="width: 64px; height: 64px;" src="{{ user_item.img.url }}">
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">@{{ user_item.user }}</strong>
+                </p>
+            </div>
+            <div class="media text-muted pt-3">
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">Имя</strong>
+                    <span>{{ user_item.first_name }}</span>
+                </p>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark ">Фамилия</strong>
+                    <span>{{ user_item.last_name }}</span>
+                </p>
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">Отчество</strong>
+                    <span>{{ user_item.father_name }}</span>
+                </p>
+            </div>
+            <div class="media text-muted pt-3">
+                <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                    <strong class="d-block text-gray-dark">О себе</strong>
+                    <span>{{ user_item.bio }}</span>
+                </p>
+            </div>
+        {% else %}
+            <div class="form-section">
+                <h2>Авторизация на сайте</h2>
+                <form method="POST">
+
+                    <a href="{% url 'user' %}" class="btn btn-outline-warning">Войти</a>
+                </form>
+                <a href="{% url 'social:begin' 'github' %}">Аутентификация через Github</a><br>
+                <a href="{% url 'social:begin' 'google-oauth2' %}">Аутентификация через Google</a>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock main_section %}

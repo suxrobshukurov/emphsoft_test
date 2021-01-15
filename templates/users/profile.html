@@ -1,0 +1,43 @@
+{% extends 'users/main.html' %}
+{% block main_section %}
+    <div class="form-section">
+        <h2>Кабинет пользователя</h2>
+        <div class="media text-muted pt-3">
+            <img class="mr-2 rounded" style="width: 64px; height: 64px;" src="{{ user.profile.img.url }}">
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">@{{ user.username }}</strong>
+                <b>Email:</b> {{ user.email }}
+            </p>
+        </div>
+        <div class="media text-muted pt-3">
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">Имя</strong>
+                <span>{{ user.profile.first_name }}</span>
+            </p>
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+            <strong class="d-block text-gray-dark ">Фамилия</strong>
+                <span>{{ user.profile.last_name }}</span>
+            </p>
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">Отчество</strong>
+                <span>{{ user.profile.father_name }}</span>
+            </p>
+        </div>
+        <div class="media text-muted pt-3">
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">О себе</strong>
+                <span>{{ user.profile.bio }}</span>
+            </p>
+        </div>
+    </div>
+    <div class="mt-4 p-3 border border-grey">
+    <h3 class="mt-4">Изменить данные про пользователя</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ update_user.as_p }}
+        {{ img_profile.as_p }}
+        <button type="submit" class="btn btn-outline-warning">Обновить данные</button>
+    </form>
+    </div>
+{% endblock main_section %}
+
